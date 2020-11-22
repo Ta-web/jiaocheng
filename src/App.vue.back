@@ -1,0 +1,73 @@
+<template>
+    <div id="app">
+        <!-- 通过 router-link 标签跳转 -->
+        <p><router-link to="/">home(家)</router-link></p>
+        <p><router-link to="/about">about</router-link></p>
+        <p><router-link to="/news" tag="span">news</router-link></p>
+        <hr />
+        <router-view></router-view>
+        <hr />
+        <IF></IF>
+
+        <h3>v-show 例子</h3>
+        <hr />
+        <Show></Show>
+
+        <h3>v-bind 例子</h3>
+        <hr />
+        <Bind></Bind>
+
+        <h3>v-on 例子</h3>
+        <hr />
+        <On></On>
+
+        <h3 :title="3213" @mousedown="handle">emit 例子</h3>
+        <hr />
+        <EmitProps :psjk="customValue" @clickNum="handle"></EmitProps>
+    </div>
+</template>
+
+<script>
+// 引入 v-if 示例组件
+import IF from './views/note/v-if.vue';
+import Show from './views/note/v-show.vue';
+import Bind from './views/note/v-bind.vue';
+import On from './views/note/v-on.vue';
+import EmitProps from './views/note/emit-props.vue';
+
+export default {
+    name: 'App',
+    components: {
+        IF,
+        Show,
+        Bind,
+        On,
+        EmitProps,
+    },
+    data() {
+        return {
+            customValue: '""""这是我传给子组件的值""""',
+        };
+    },
+    methods: {
+        /**
+         * @description: 由子组件触发的事件
+         * @param {String} str: 点击总次数
+         */
+        handle(str) {
+            this.$router.push('/news');
+            console.log('来自父组件的打印: ', str);
+        },
+    },
+};
+</script>
+
+<style lang="stylus">
+#app
+  font-family Avenir, Helvetica, Arial, sans-serif
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  text-align center
+  color #2c3e50
+  margin-top 60px
+</style>
